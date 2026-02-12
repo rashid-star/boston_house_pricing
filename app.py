@@ -26,8 +26,12 @@ def predict_api():
 def predict():
     data = [float(x) for x in request.form.values()]
     final_input = scaler.transform(np.array(data).reshape(1,-1))
-    output = regmodel.predict(final_input)[0]
-    return render_template('home.html', prediction_text='Predicted Price of the House is {}'.format(output))
+    output = round(regmodel.predict(final_input)[0]*1000,2)
+    return render_template(
+        "home.html",
+        prediction_text=f"Estimated House Price: ${output}"
+    )
+
 
 if __name__ == "__main__":
     app.run(debug=True)
