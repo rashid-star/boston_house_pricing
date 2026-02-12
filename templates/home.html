@@ -1,48 +1,121 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ML API</title>
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <title>Boston House Price Predictor</title>
 
-  
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body{
+            height:100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .container{
+            background:white;
+            padding:40px;
+            border-radius:15px;
+            width:400px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+
+        h1{
+            margin-bottom:20px;
+            color:#333;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            margin:8px 0;
+            border:1px solid #ccc;
+            border-radius:8px;
+            outline:none;
+            transition:0.3s;
+        }
+
+        input:focus{
+            border-color:#667eea;
+            box-shadow:0 0 5px rgba(102,126,234,0.5);
+        }
+
+        button{
+            margin-top:15px;
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:8px;
+            background:#667eea;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#5a67d8;
+            transform:scale(1.03);
+        }
+
+        .result{
+            margin-top:20px;
+            font-size:18px;
+            color:#222;
+            font-weight:600;
+        }
+
+        @media(max-width:500px){
+            .container{
+                width:90%;
+                padding:25px;
+            }
+        }
+
+    </style>
 </head>
 
 <body>
- <div class="login">
-	<h1>Boston House Price Prediction</h1>
 
-     <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post">
-      <input type="text" name="CRIM" placeholder="CRIM" required="required" /><br>
-    	<input type="text" name="ZN" placeholder="ZN" required="required" /><br>
-        <input type="text" name="INDUS" placeholder="INDUS" required="required" /><br>
-        <input type="text" name="CHAS" placeholder="CHAS" required="required" /><br>
-        <input type="text" name="NOX" placeholder="NOX" required="required" /><br>
-        <input type="text" name="RM" placeholder="RM" required="required" /><br>
-        <input type="text" name="Age" placeholder="Age" required="required" /><br>
-        <input type="text" name="DIS" placeholder="DIS" required="required" /><br>
-        <input type="text" name="RAD" placeholder="RAD" required="required" /><br>
-        <input type="text" name="TAX" placeholder="TAX" required="required" /><br>
-        <input type="text" name="PTRATIO" placeholder="PTRATIO" required="required" /><br>
-        <input type="text" name="B" placeholder="B" required="required" /><br>
-        <input type="text" name="LSTAT" placeholder="LSTAT" required="required" /><br>
+<div class="container">
+    <h1>🏠 House Price Prediction</h1>
 
-       
+    <form action="{{ url_for('predict') }}" method="post">
 
-        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        <input type="text" name="CRIM" placeholder="Crime Rate" required>
+        <input type="text" name="ZN" placeholder="Residential Land Zone" required>
+        <input type="text" name="INDUS" placeholder="Industry Area" required>
+        <input type="text" name="CHAS" placeholder="Near River (0/1)" required>
+        <input type="text" name="NOX" placeholder="Nitric Oxide" required>
+        <input type="text" name="RM" placeholder="Rooms" required>
+        <input type="text" name="Age" placeholder="House Age" required>
+        <input type="text" name="DIS" placeholder="Distance from Office" required>
+        <input type="text" name="RAD" placeholder="Highway Access" required>
+        <input type="text" name="TAX" placeholder="Property Tax" required>
+        <input type="text" name="PTRATIO" placeholder="Teacher Ratio" required>
+        <input type="text" name="B" placeholder="Black Population" required>
+        <input type="text" name="LSTAT" placeholder="Lower Status %" required>
+
+        <button type="submit">Predict Price 🚀</button>
     </form>
 
-   <br>
-   <br>
-  
-   
- </div>
- {{prediction_text}}
+    <div class="result">
+        {{ prediction_text }}
+    </div>
+
+</div>
 
 </body>
 </html>
